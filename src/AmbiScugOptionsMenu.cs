@@ -42,7 +42,7 @@ namespace AmbiScug.AmbiScugOptionsMenu
             // Tab 1
             OpContainer tab1Container = new OpContainer(new Vector2(0, 0));
             opTab1.AddItems(tab1Container);
-
+            /*
             for (int i = 0; i <= 600; i += 10) // Line grid to help align things, don't leave this in your final code. Almost every element starts from bottom-left.
             {
                 Color c;
@@ -74,7 +74,7 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 lineSprite.scaleY = Custom.Dist(a, b);
                 tab1Container.container.AddChild(lineSprite);
             }
-
+            */
             // You can put sprites with effects in the Remix Menu by using an OpContainer
             //sprite1 = new FSprite("Futile_White") { x = 500, y = 350, width = 100, height = 100 };
             //sprite2 = new FSprite("Futile_White") { x = 500, y = 250, width = 100, height = 100 };
