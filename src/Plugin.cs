@@ -118,9 +118,9 @@ namespace AmbiScug
         }
         private Player.ObjectGrabability Player_DoubleSpearmaster(On.Player.orig_Grabability orig, Player self, PhysicalObject obj)
         {
-            if (obj is Spear && AmbiScugOptionsMenu.AmbiScugOptionsMenu.spearCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Spear)
+            if (obj is Spear && (!AmbiScugOptionsMenu.AmbiScugOptionsMenu.spearCheckBox.Value == true) && ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Spear)
             {
-                return (Player.ObjectGrabability)1;
+                return (Player.ObjectGrabability)2;
             }
             return orig(self, obj);
         }

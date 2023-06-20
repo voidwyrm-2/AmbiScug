@@ -121,7 +121,7 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 new OpLabel(70f, 440f, "Enable dual-wielding for Gourmand", false),
                 new OpLabel(70f, 420f, "Enable dual-wielding for Arti", false),
                 new OpLabel(70f, 400f, "Enable dual-wielding for Ruffles", false),
-                new OpLabel(70f, 380f, "Enable dual-wielding for Spearmaster", false),
+                new OpLabel(70f, 380f, "Enable dual-wielding for Spearmaster", true),
                 new OpLabel(70f, 360f, "Enable dual-wielding for Exploding Pancakes With Mind", false),
                 new OpLabel(70f, 340f, "Enable dual-wielding for Painworld", false),
             };
