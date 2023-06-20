@@ -29,7 +29,7 @@ namespace AmbiScug.AmbiScugOptionsMenu
             gourCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleGourCheckbox", false);
             artiCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleArtiCheckbox", false);
             rufflesCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleRufflesCheckbox", false);
-            spearCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSpearCheckbox", false);
+            spearCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSpearCheckbox", true);
             pancakeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoublePancakeCheckbox", false);
             sofanthielCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSofanthielCheckbox", false);
         }
@@ -115,15 +115,15 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 // Not adding a OpScrollBox, it's just a canvas to add more elements in less space, basically a pocket tab
                 // Also not adding an OpSimpleImageButton as it's just a simple button with an OpImage stuck to it, has problems of both at once lmao
 
-                new OpLabel(70f, 500f, "Enable dual-wielding for Survivor", false),
-                new OpLabel(70f, 480f, "Enable dual-wielding for Monk", false),
-                new OpLabel(70f, 460f, "Enable dual-wielding for Hunter", false),
-                new OpLabel(70f, 440f, "Enable dual-wielding for Gourmand", false),
-                new OpLabel(70f, 420f, "Enable dual-wielding for Arti", false),
-                new OpLabel(70f, 400f, "Enable dual-wielding for Ruffles", false),
-                new OpLabel(70f, 380f, "Enable dual-wielding for Spearmaster", true),
-                new OpLabel(70f, 360f, "Enable dual-wielding for Exploding Pancakes With Mind", false),
-                new OpLabel(70f, 340f, "Enable dual-wielding for Painworld", false),
+                new OpLabel(80f, 500f, "Enable dual-wielding for Survivor", false),
+                new OpLabel(80f, 480f, "Enable dual-wielding for Monk", false),
+                new OpLabel(80f, 460f, "Enable dual-wielding for Hunter", false),
+                new OpLabel(80f, 440f, "Enable dual-wielding for Gourmand", false),
+                new OpLabel(80f, 420f, "Enable dual-wielding for Arti", false),
+                new OpLabel(80f, 400f, "Enable dual-wielding for Ruffles", false),
+                new OpLabel(80f, 380f, "Enable dual-wielding for Spearmaster", false),
+                new OpLabel(80f, 360f, "Enable dual-wielding for Exploding Pancakes With Mind", false),
+                new OpLabel(80f, 340f, "Enable dual-wielding for Painworld", false),
             };
             opTab1.AddItems(UIArrayElements2);
 
