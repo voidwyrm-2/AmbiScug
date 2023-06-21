@@ -32,15 +32,21 @@ namespace AmbiScug.AmbiScugOptionsMenu
             spearCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSpearCheckbox", true);
             pancakeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoublePancakeCheckbox", false);
             sofanthielCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSofanthielCheckbox", false);
+
+            artiSplodeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_ArtiSplodeCheckbox", true);
+            hunterSplodeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_HunterSplodeCheckbox", true);
         }
         public override void Initialize()
         {
-            var opTab1 = new OpTab(this, "Main");
-            //var opTab2 = new OpTab(this, "Extra Config");
+            var opTab1 = new OpTab(this, "AmbiScug");
+            var opTab2 = new OpTab(this, "OtherScug");
             this.Tabs = new[] { opTab1/*, opTab2 */}; // Add the tabs into your list of tabs. If there is only a single tab, it will not show the flap on the side because there is not need to.
 
             // Tab 1
             OpContainer tab1Container = new OpContainer(new Vector2(0, 0));
+            opTab1.AddItems(tab1Container);
+            // Tab 2
+            OpContainer tab2Container = new OpContainer(new Vector2(0, 0));
             opTab1.AddItems(tab1Container);
             /*
             for (int i = 0; i <= 600; i += 10) // Line grid to help align things, don't leave this in your final code. Almost every element starts from bottom-left.
@@ -98,6 +104,20 @@ namespace AmbiScug.AmbiScugOptionsMenu
             };
             opTab1.AddItems(UIArrayElements);
 
+            UIelement[] UIArrayElements3 = new UIelement[] // Labels in a fixed box size + alignment
+            {
+                new OpCheckBox(artiSplodeCheckBox, 50, 500), // Try to make your boolean toggles as "positive is true" simple wording, I accidentally write double negative long sentences a lot for my boolean names.
+                new OpCheckBox(hunterSplodeCheckBox, 50, 480),
+                //new OpCheckBox(CheckBox, 50, 460),
+                //new OpCheckBox(CheckBox, 50, 440),
+                //new OpCheckBox(CheckBox, 50, 420),
+                //new OpCheckBox(CheckBox, 50, 400),
+                //new OpCheckBox(CheckBox, 50, 380),
+                //new OpCheckBox(CheckBox, 50, 360),
+                //new OpCheckBox(CheckBox, 50, 340),
+            };
+            opTab2.AddItems(UIArrayElements3);
+
             //OpRadioButtonGroup testRadioGroup = new OpRadioButtonGroup(testRadio); // Radio buttons needs to be created through a Radio button group which must be added to the canvas before adding its buttons.
             //opTab1.AddItems(testRadioGroup);
             //testRadioGroup.SetButtons(new OpRadioButton[]
@@ -126,6 +146,27 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 new OpLabel(80f, 340f, "Enable dual-wielding for Painworld", false),
             };
             opTab1.AddItems(UIArrayElements2);
+
+            UIelement[] UIArrayElements4 = new UIelement[] //create an array of ui elements
+            {
+                new OpLabel(0f, 550f, "OtherScug options", true),
+                //new OpFloatSlider(testFloatSlider, new Vector2(85, 245), 200, 2, true){max = 1000, min = 100, hideLabel = false},
+                //new OpLabelLong(new Vector2(25, 185), new Vector2(200,50), "Awri Lynn's awesomeness level\n and coolness factor slider", true),
+                //new OpLabelLong(new Vector2(100,0),new Vector2(400,100), "Remix Menu Template examples is entirely just a menu mod to help modders make their own Remix menu, using dnSpy to look into the mod's code or downloading it from the wiki / Community.\n Try out the menu widgets then take the parts that you want from the code knowing that they will work", true),
+                // Not adding a OpScrollBox, it's just a canvas to add more elements in less space, basically a pocket tab
+                // Also not adding an OpSimpleImageButton as it's just a simple button with an OpImage stuck to it, has problems of both at once lmao
+
+                new OpLabel(80f, 500f, "Enable Artificer exploding on death", false),
+                //new OpLabel(80f, 480f, "", false),
+                //new OpLabel(80f, 460f, "", false),
+                //new OpLabel(80f, 440f, "", false),
+                //new OpLabel(80f, 420f, "", false),
+                //new OpLabel(80f, 400f, "", false),
+                //new OpLabel(80f, 380f, "", false),
+                //new OpLabel(80f, 360f, "", false),
+                //new OpLabel(80f, 340f, "", false),
+            };
+            opTab1.AddItems(UIArrayElements4);
 
             //OpContainer containerTab2 = new OpContainer(new Vector2(0, 0));
             //opTab2.AddItems(containerTab2);
@@ -168,6 +209,16 @@ namespace AmbiScug.AmbiScugOptionsMenu
         public static Configurable<bool> spearCheckBox;
         public static Configurable<bool> pancakeCheckBox;
         public static Configurable<bool> sofanthielCheckBox;
+
+        public static Configurable<bool> artiSplodeCheckBox;
+        public static Configurable<bool> hunterSplodeCheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
+        //public static Configurable<bool> CheckBox;
         float numberGoUp = 0;
         //FSprite AwriBlush;
         private FSprite sprite1 = new FSprite("Futile_White");
