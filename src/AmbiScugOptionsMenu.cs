@@ -47,7 +47,7 @@ namespace AmbiScug.AmbiScugOptionsMenu
             opTab1.AddItems(tab1Container);
             // Tab 2
             OpContainer tab2Container = new OpContainer(new Vector2(0, 0));
-            opTab1.AddItems(tab1Container);
+            opTab2.AddItems(tab2Container);
             /*
             for (int i = 0; i <= 600; i += 10) // Line grid to help align things, don't leave this in your final code. Almost every element starts from bottom-left.
             {
