@@ -33,14 +33,20 @@ namespace AmbiScug.AmbiScugOptionsMenu
             pancakeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoublePancakeCheckbox", false);
             sofanthielCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleSofanthielCheckbox", false);
 
+            doubleScugpupCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleScugpupCheckbox", true);
+
+
             artiSplodeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_ArtiSplodeCheckbox", true);
             hunterSplodeCheckBox = this.config.Bind<bool>("AmbiScug_Bool_HunterSplodeCheckbox", true);
+            skillIssueCheckBox = this.config.Bind<bool>("AmbiScug_Bool_SkillIssueCheckbox", false);
+            skillIssueSlider = this.config.Bind<int>("AmbiScug_Int_SkillIssueSlider", 1);
+            antiStunCheckBox = this.config.Bind<bool>("AmbiScug_Bool_AntiStunCheckbox", true);
         }
         public override void Initialize()
         {
             var opTab1 = new OpTab(this, "AmbiScug");
             var opTab2 = new OpTab(this, "OtherScug");
-            this.Tabs = new[] { opTab1/*, opTab2 */}; // Add the tabs into your list of tabs. If there is only a single tab, it will not show the flap on the side because there is not need to.
+            this.Tabs = new[] { opTab1, opTab2}; // Add the tabs into your list of tabs. If there is only a single tab, it will not show the flap on the side because there is not need to.
 
             // Tab 1
             OpContainer tab1Container = new OpContainer(new Vector2(0, 0));
@@ -101,6 +107,8 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 new OpCheckBox(spearCheckBox, 50, 380),
                 new OpCheckBox(pancakeCheckBox, 50, 360),
                 new OpCheckBox(sofanthielCheckBox, 50, 340),
+
+                new OpCheckBox(doubleScugpupCheckBox, 50, 300),
             };
             opTab1.AddItems(UIArrayElements);
 
@@ -108,8 +116,9 @@ namespace AmbiScug.AmbiScugOptionsMenu
             {
                 new OpCheckBox(artiSplodeCheckBox, 50, 500), // Try to make your boolean toggles as "positive is true" simple wording, I accidentally write double negative long sentences a lot for my boolean names.
                 new OpCheckBox(hunterSplodeCheckBox, 50, 480),
-                //new OpCheckBox(CheckBox, 50, 460),
-                //new OpCheckBox(CheckBox, 50, 440),
+                new OpCheckBox(skillIssueCheckBox, 50, 460),
+                new OpSlider(skillIssueSlider, new Vector2(100, 460)),
+                new OpCheckBox(antiStunCheckBox, 50, 440),
                 //new OpCheckBox(CheckBox, 50, 420),
                 //new OpCheckBox(CheckBox, 50, 400),
                 //new OpCheckBox(CheckBox, 50, 380),
@@ -144,29 +153,29 @@ namespace AmbiScug.AmbiScugOptionsMenu
                 new OpLabel(80f, 380f, "Enable dual-wielding for Spearmaster", false),
                 new OpLabel(80f, 360f, "Enable dual-wielding for Exploding Pancakes With Mind", false),
                 new OpLabel(80f, 340f, "Enable dual-wielding for Painworld", false),
+                new OpLabel(80f, 300f, "Enable dual-wielding for Scugpups(or something)", false),
             };
             opTab1.AddItems(UIArrayElements2);
 
             UIelement[] UIArrayElements4 = new UIelement[] //create an array of ui elements
             {
                 new OpLabel(0f, 550f, "OtherScug options", true),
-                //new OpFloatSlider(testFloatSlider, new Vector2(85, 245), 200, 2, true){max = 1000, min = 100, hideLabel = false},
                 //new OpLabelLong(new Vector2(25, 185), new Vector2(200,50), "Awri Lynn's awesomeness level\n and coolness factor slider", true),
                 //new OpLabelLong(new Vector2(100,0),new Vector2(400,100), "Remix Menu Template examples is entirely just a menu mod to help modders make their own Remix menu, using dnSpy to look into the mod's code or downloading it from the wiki / Community.\n Try out the menu widgets then take the parts that you want from the code knowing that they will work", true),
                 // Not adding a OpScrollBox, it's just a canvas to add more elements in less space, basically a pocket tab
                 // Also not adding an OpSimpleImageButton as it's just a simple button with an OpImage stuck to it, has problems of both at once lmao
 
                 new OpLabel(80f, 500f, "Enable Artificer exploding on death", false),
-                //new OpLabel(80f, 480f, "", false),
-                //new OpLabel(80f, 460f, "", false),
-                //new OpLabel(80f, 440f, "", false),
+                new OpLabel(80f, 480f, "Enable Hunter exploding on death", false),
+                new OpLabel(80f, 460f, "Enable the thing that let's you take several spear hits cuz scavs are scavs, slider for how many spear your able to take(neither does anything right now)", false),
+                new OpLabel(80f, 440f, "Enable Anti-Stun Protection(ASP)[does nothing right now]", false),
                 //new OpLabel(80f, 420f, "", false),
                 //new OpLabel(80f, 400f, "", false),
                 //new OpLabel(80f, 380f, "", false),
                 //new OpLabel(80f, 360f, "", false),
                 //new OpLabel(80f, 340f, "", false),
             };
-            opTab1.AddItems(UIArrayElements4);
+            opTab2.AddItems(UIArrayElements4);
 
             //OpContainer containerTab2 = new OpContainer(new Vector2(0, 0));
             //opTab2.AddItems(containerTab2);
@@ -210,11 +219,14 @@ namespace AmbiScug.AmbiScugOptionsMenu
         public static Configurable<bool> pancakeCheckBox;
         public static Configurable<bool> sofanthielCheckBox;
 
+        public static Configurable<bool> doubleScugpupCheckBox;
+
+
         public static Configurable<bool> artiSplodeCheckBox;
         public static Configurable<bool> hunterSplodeCheckBox;
-        //public static Configurable<bool> CheckBox;
-        //public static Configurable<bool> CheckBox;
-        //public static Configurable<bool> CheckBox;
+        public static Configurable<bool> skillIssueCheckBox;
+        public static Configurable<bool> antiStunCheckBox;
+        public static Configurable<int> skillIssueSlider;
         //public static Configurable<bool> CheckBox;
         //public static Configurable<bool> CheckBox;
         //public static Configurable<bool> CheckBox;

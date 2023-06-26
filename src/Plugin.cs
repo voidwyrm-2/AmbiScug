@@ -16,6 +16,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IL;
+using System.Xml.Schema;
 
 namespace AmbiScug
 {
@@ -64,28 +66,57 @@ namespace AmbiScug
             On.Player.Grabability += Player_DoublePancakes;
             On.Player.Grabability += Player_DoubleSofanthiel;
 
-            On.Player.Die += Player_ArtiSplode;
-            //On.Player.Die += Player_HunterSplode;
+            On.Player.Grabability += Player_DoubleScugpup;
 
+            On.Player.Die += Player_ArtiSplode;
+            On.Player.Die += Player_HunterSplode;
+            //On.Creature.Violence += Player_Creature_SkillIssue;
+            //On.Player.Grabbed += Player_AntiStun;
         }
 
         /*
+        private void Player_AntiStun(On.Player.orig_Grabbed orig, Player self, Creature.Grasp grasp)
+        {
+            if (AmbiScugOptionsMenu.AmbiScugOptionsMenu.antiStunCheckBox.Value == true)
+            {
+
+            }
+        }
+
+        int Dmg = 0;
+        private void Player_Creature_SkillIssue(On.Creature.orig_Violence orig, Creature self, BodyChunk source, Vector2? directionAndMomentum, BodyChunk hitChunk, PhysicalObject.Appendage.Pos hitAppendage, Creature.DamageType type, float damage, float stunBonus)
+        {
+            orig(self, source, directionAndMomentum, hitChunk, hitAppendage, type, damage, stunBonus);
+            if(self is Player && AmbiScugOptionsMenu.AmbiScugOptionsMenu.skillIssueCheckBox.Value == true)
+            {
+                Dmg++;
+                if(Dmg == AmbiScugOptionsMenu.AmbiScugOptionsMenu.skillIssueSlider.Value)
+                {
+                    self.Die();
+                }
+            }
+        }
+        */
+
         private void Player_HunterSplode(On.Player.orig_Die orig, Player self)
         {
             orig(self);
             bool wasDead = self.dead;
-            if (!wasDead && self.dead && AmbiScugOptionsMenu.AmbiScugOptionsMenu.artiSplodeCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Artificer)
+            if (wasDead && self.dead && AmbiScugOptionsMenu.AmbiScugOptionsMenu.artiSplodeCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == SlugcatStats.Name.Red)
             {
-            
+                var room = self.room;
+                var pos = self.mainBodyChunk.pos;
+                AbstractCreature abstractCreature1 = new AbstractCreature(room.world, StaticWorld.GetCreatureTemplate(CreatureTemplate.Type.DaddyLongLegs), null, room.GetWorldCoordinate(pos), room.game.GetNewID());
+                room.abstractRoom.entities.Add(abstractCreature1);
+                abstractCreature1.Realize();
             }
         }
-        */
 
         private void Player_ArtiSplode(On.Player.orig_Die orig, Player self)
         {
             orig(self);
             bool wasDead = self.dead;
-            if (!wasDead && self.dead && AmbiScugOptionsMenu.AmbiScugOptionsMenu.artiSplodeCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Artificer)
+            if (wasDead && self.dead && AmbiScugOptionsMenu.AmbiScugOptionsMenu.artiSplodeCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Artificer)
             {
                     // Adapted from ScavengerBomb.Explode
                     var room = self.room;
@@ -105,6 +136,16 @@ namespace AmbiScug
 
 
 
+        private Player.ObjectGrabability Player_DoubleScugpup(On.Player.orig_Grabability orig, Player self, PhysicalObject obj)
+        {
+            if (obj is Player && AmbiScugOptionsMenu.AmbiScugOptionsMenu.doubleScugpupCheckBox.Value == true)
+            {
+                return (Player.ObjectGrabability)1;
+            }
+            return orig(self, obj);
+        }
+
+
         private Player.ObjectGrabability Player_DoubleSurvivor(On.Player.orig_Grabability orig, Player self, PhysicalObject obj)
         {
             if (obj is Spear && self.SlugCatClass == SlugcatStats.Name.White && AmbiScugOptionsMenu.AmbiScugOptionsMenu.survCheckBox.Value == true)
@@ -116,7 +157,7 @@ namespace AmbiScug
 
         private Player.ObjectGrabability Player_DoubleMonk(On.Player.orig_Grabability orig, Player self, PhysicalObject obj)
         {
-            if (obj is Spear && self.SlugCatClass == SlugcatStats.Name.White && AmbiScugOptionsMenu.AmbiScugOptionsMenu.monkCheckBox.Value == true)
+            if (obj is Spear && self.SlugCatClass == SlugcatStats.Name.Yellow && AmbiScugOptionsMenu.AmbiScugOptionsMenu.monkCheckBox.Value == true)
             {
                 return (Player.ObjectGrabability)1;
             }
@@ -124,7 +165,7 @@ namespace AmbiScug
         }
         private Player.ObjectGrabability Player_DoubleHunter(On.Player.orig_Grabability orig, Player self, PhysicalObject obj)
         {
-            if (obj is Spear && self.SlugCatClass == SlugcatStats.Name.White && AmbiScugOptionsMenu.AmbiScugOptionsMenu.huntCheckBox.Value == true)
+            if (obj is Spear && self.SlugCatClass == SlugcatStats.Name.Red && AmbiScugOptionsMenu.AmbiScugOptionsMenu.huntCheckBox.Value == true)
             {
                 return (Player.ObjectGrabability)1;
             }
