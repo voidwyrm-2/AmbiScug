@@ -1,0 +1,163 @@
+﻿/*// hooks
+
+Loading custom assets put png in folder next to mod  and import with line: Futile.atlasManager.LoadImage("atlases/your_png");
+Futile.atlasManager.LoadImage("atlases/NP/Awri_BG");
+Futile.atlasManager.LoadImage("atlases/NP/Awri_Hat_Badge_MadeByPeskm_112");
+Futile.atlasManager.LoadImage("atlases/NP/Awri_real_magic_stuff_112");
+Futile.atlasManager.LoadImage("atlases/NP/AwriBlush_112");
+Futile.atlasManager.LoadImage("atlases/NP/AwriHappy_112");
+
+On.Player.Grabability += Player_DoubleScugpup;
+
+On.Player.Die += Player_HunterSplode;
+
+On.Player.Grabbed += Player_AntiStun;
+
+
+*/// hooks end
+
+
+
+/*// code
+
+private void Player_AntiStun(On.Player.orig_Grabbed orig, Player self, Creature.Grasp grasp)
+{
+    if (AmbiScugOptionsMenu.AmbiScugOptionsMenu.antiStunCheckBox.Value == true)
+    {
+        
+    }
+}
+
+
+private void Player_HunterSplode(On.Player.orig_Die orig, Player self)
+{
+    orig(self);
+    bool wasDead = self.dead;
+    if (wasDead && self.dead && AmbiScugOptionsMenu.AmbiScugOptionsMenu.artiSplodeCheckBox.Value == true && ModManager.MSC && self.SlugCatClass == SlugcatStats.Name.Red)
+    {
+        var room = self.room;
+        var pos = self.mainBodyChunk.pos;
+        AbstractCreature abstractCreature1 = new AbstractCreature(room.world, StaticWorld.GetCreatureTemplate(CreatureTemplate.Type.DaddyLongLegs), null, room.GetWorldCoordinate(pos), room.game.GetNewID());
+        room.abstractRoom.entities.Add(abstractCreature1);
+        abstractCreature1.Realize();
+    }
+}
+
+
+*/// code end
+
+
+
+/*// options
+
+doubleScugpupCheckBox = this.config.Bind<bool>("AmbiScug_Bool_DoubleScugpupCheckbox", true);
+
+
+for (int i = 0; i <= 600; i += 10) // Line grid to help align things, don't leave this in your final code. Almost every element starts from bottom-left.
+{
+    Color c;
+    c = Color.grey;
+    if (i % 50 == 0) { c = Color.yellow; }
+    if (i % 100 == 0) { c = Color.red; }
+    FSprite lineSprite = new FSprite("pixel");
+    lineSprite.color = c;
+    lineSprite.alpha = 0.2f;
+    lineSprite.SetAnchor(new Vector2(0.5f, 0f));
+    Vector2 a = new Vector2(i, 0);
+    lineSprite.SetPosition(a);
+    Vector2 b = new Vector2(i, 600);
+    float rot = Custom.VecToDeg(Custom.DirVec(a, b));
+    lineSprite.rotation = rot;
+    lineSprite.scaleX = 2f;
+    lineSprite.scaleY = Custom.Dist(a, b);
+    tab1Container.container.AddChild(lineSprite);
+    a = new Vector2(0, i);
+    b = new Vector2(600, i);
+    lineSprite = new FSprite("pixel");
+    lineSprite.color = c;
+    lineSprite.alpha = 0.2f;
+    lineSprite.SetAnchor(new Vector2(0.5f, 0f));
+    lineSprite.SetPosition(a);
+    rot = Custom.VecToDeg(Custom.DirVec(a, b));
+    lineSprite.rotation = rot;
+    lineSprite.scaleX = 2f;
+    lineSprite.scaleY = Custom.Dist(a, b);
+    tab1Container.container.AddChild(lineSprite);
+}
+
+You can put sprites with effects in the Remix Menu by using an OpContainer
+sprite1 = new FSprite("Futile_White") { x = 500, y = 350, width = 100, height = 100 };
+sprite2 = new FSprite("Futile_White") { x = 500, y = 250, width = 100, height = 100 };
+sprite1.shader = Custom.rainWorld.Shaders["SmokeTrail"];
+sprite2.shader = Custom.rainWorld.Shaders["GhostDistortion"];
+tab1Container.container.AddChild(sprite1);
+tab1Container.container.AddChild(sprite2);
+
+int sizeTest = 100;
+
+
+new OpFloatSlider(testFloatSlider, new Vector2(85, 245), 200, 2, true){max = 1000, min = 100, hideLabel = false},
+new OpLabelLong(new Vector2(25, 185), new Vector2(200,50), "Awri Lynn's awesomeness level\n and coolness factor slider", true),
+new OpLabelLong(new Vector2(100,0),new Vector2(400,100), "Remix Menu Template examples is entirely just a menu mod to help modders make their own Remix menu, using dnSpy to look into the mod's code or downloading it from the wiki / Community.\n Try out the menu widgets then take the parts that you want from the code knowing that they will work", true),
+Not adding a OpScrollBox, it's just a canvas to add more elements in less space, basically a pocket tab
+Also not adding an OpSimpleImageButton as it's just a simple button with an OpImage stuck to it, has problems of both at once lmao
+
+OpRadioButtonGroup testRadioGroup = new OpRadioButtonGroup(testRadio); // Radio buttons needs to be created through a Radio button group which must be added to the canvas before adding its buttons.
+opTab1.AddItems(testRadioGroup);
+testRadioGroup.SetButtons(new OpRadioButton[]
+{
+    new OpRadioButton(50, 450){description = "test radio button 1, there can only be one"},
+    new OpRadioButton(100, 450){description = "test radio button 2, there can only be one"}
+});
+
+
+OpContainer containerTab2 = new OpContainer(new Vector2(0, 0));
+opTab2.AddItems(containerTab2);
+FSprite AwriBG = new FSprite("atlases/NP/Awri_BG") { x = 300, y = 300, width = 600, height = 600 };
+FSprite AwriRainbow = new FSprite("atlases/NP/Awri_Hat_Badge_MadeByPeskm_112") { x = 200, y = 456, width = 112, height = 112 };
+FSprite AwriMagic = new FSprite("atlases/NP/Awri_real_magic_stuff_112") { x = 100, y = 500, width = 112, height = 112 };
+AwriBlush = new FSprite("atlases/NP/AwriBlush_112") { x = 400, y = 344, width = 112, height = 112 };
+FSprite AwriHappy = new FSprite("atlases/NP/AwriHappy_112") { x = 200, y = 344, width = 112, height = 112 };
+containerTab2.container.AddChild(AwriBG);
+containerTab2.container.AddChild(AwriRainbow);
+containerTab2.container.AddChild(AwriMagic);
+containerTab2.container.AddChild(AwriBlush);
+containerTab2.container.AddChild(AwriHappy);
+
+UIArrayElements2 = new UIelement[]
+{
+        
+};
+
+opTab2.AddItems(UIArrayElements2);
+
+public static Configurable<bool> CheckBox;
+public static Configurable<bool> CheckBox;
+public static Configurable<bool> CheckBox;
+public static Configurable<bool> CheckBox;
+
+
+new OpCheckBox(CheckBox, 50, 460),
+new OpCheckBox(CheckBox, 50, 440),
+new OpCheckBox(CheckBox, 50, 420),
+new OpCheckBox(CheckBox, 50, 400),
+new OpCheckBox(CheckBox, 50, 380),
+new OpCheckBox(CheckBox, 50, 360),
+new OpCheckBox(CheckBox, 50, 340),
+new OpLabel(80f, 440f, "", false),
+new OpLabel(80f, 420f, "", false),
+new OpLabel(80f, 400f, "", false),
+new OpLabel(80f, 380f, "", false),
+new OpLabel(80f, 360f, "", false),
+new OpLabel(80f, 340f, "", false),
+new OpCheckBox(CheckBox, 50, 420),
+new OpCheckBox(CheckBox, 50, 400),
+new OpCheckBox(CheckBox, 50, 380),
+new OpCheckBox(CheckBox, 50, 360),
+new OpCheckBox(CheckBox, 50, 340),
+
+new OpCheckBox(doubleScugpupCheckBox, 50, 300),
+new OpCheckBox(hunterSplodeCheckBox, 50, 480),
+
+
+*/// options end
